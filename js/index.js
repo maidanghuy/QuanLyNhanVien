@@ -17,6 +17,8 @@ console.log(users);
 <th>Tổng lương</th>
 <th>Xếp loại</th> */}
 
+
+// ----------------------------------------------------------------
 // tao thong tin cho tung hang trong bang
 function handleRow(user) {
     const roleMap = ["Giám đốc", "Trưởng phòng", "Nhân viên"];
@@ -43,6 +45,7 @@ function handleRow(user) {
     `;
 }
 
+
 // ----------------------------------------------------------------
 // handle ra list tren UI
 function handleTable(users) {
@@ -60,6 +63,7 @@ function handleTable(users) {
 }
 handleTable(users);
 
+
 // ----------------------------------------------------------------
 // lay cac element tu form
 function getForm() {
@@ -75,7 +79,7 @@ function getForm() {
     };
 }
 // ----------------------------------------------------------------
-// lay thong tin va handle lai list
+// lay thong tin tu from va tao user obj
 function getInfo() {
     const form = getForm();
     let { account, name, email, password, datepicker, salary, role, workHours } = form;
@@ -135,7 +139,9 @@ function getInfo() {
     return user;
 }
 
+
 // ----------------------------------------------------------------
+// day user vao mang, handle lai table va reset from
 function addUser() {
     const user = getInfo();
     if (user) {
@@ -148,22 +154,28 @@ document.getElementById("btnThemNV").addEventListener("click", addUser);
 
 
 // ----------------------------------------------------------------
+// an nut cap nhap va hien nut them
 function hiddenCapNhap() {
     document.getElementById('btnCapNhat').style.display = 'none';
     document.getElementById('btnThemNV').style.display = 'block';
 }
 
+
 // ----------------------------------------------------------------
+// hien nut cap nhap va an nut them
 function appendCapNhap() {
     document.getElementById('btnCapNhat').style.display = 'block';
     document.getElementById('btnThemNV').style.display = 'none';
 }
+
 
 // ----------------------------------------------------------------
 // nhan nut them thi nut cap nhat se bi an di
 document.getElementById('btnThem').addEventListener('click', function () {
     hiddenCapNhap();
 });
+
+
 // ----------------------------------------------------------------
 // reset form
 function resetForm() {
@@ -199,6 +211,7 @@ document.getElementById("myTable").addEventListener("click", function (event) {
         deleteUser(deleteButton);
     }
 });
+
 
 // ----------------------------------------------------------------
 // update user
@@ -263,5 +276,14 @@ function deleteUser(account) {
     resetForm();
 }
 
+
 // ----------------------------------------------------------------
 // Search User
+let handleSearch = function () {
+    const input = document.getElementById('searchName').value.toLowerCase();
+    const filteredUsers = users.filter(user => user.getLevel().includes(input));
+    console.log(filteredUsers);
+    handleTable(filteredUsers);
+}
+document.getElementById('btnTimNV').addEventListener('click', handleSearch);
+document.getElementById('searchName').addEventListener("keydown", handleSearch);
