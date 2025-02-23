@@ -1,5 +1,5 @@
 import {
-    validationAccount, validationName, validationEmail, validationPassword,
+    validationAccount, checkUniqueAccount, validationName, validationEmail, validationPassword,
     validationDate, validationSalary, validationRole, validationWorkHours
 } from './validation.js';
 
@@ -86,6 +86,11 @@ function getInfo() {
     console.log(account, name, email, password, datepicker, salary, role, workHours);
     if (!validationAccount(account.value)) {
         alert('Tài khoản phải từ 4 đến 6 ký tự và chỉ chứa số.');
+        return;
+    }
+
+    if (!checkUniqueAccount(account.value, users)) {
+        alert('Tài khoản đã tồn tại');
         return;
     }
     account = account.value.padStart(6, '0');

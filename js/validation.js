@@ -7,9 +7,13 @@
 // + Lương cơ bản 1 000 000 - 20 000 000, không để trống
 // + Chức vụ phải chọn chức vụ hợp lệ (Giám đốc, Trưởng Phòng, Nhân Viên)
 // + Số giờ làm trong tháng 80 - 200 giờ, không để trống
-
+import { propAccount } from './userObject.js';
 function validationAccount(account) {
     return account.length >= 4 && account.length <= 6 && /^[0-9]+$/.test(account);
+}
+
+function checkUniqueAccount(account, users) {
+    return users.every(user => user[propAccount] !== account);
 }
 
 function validationName(name) {
@@ -41,7 +45,7 @@ function validationWorkHours(workHours) {
     return workHours >= 80 && workHours <= 200;
 }
 
-export { validationAccount, validationName, validationEmail, validationPassword, validationDate, validationSalary, validationRole, validationWorkHours }
+export { validationAccount, checkUniqueAccount, validationName, validationEmail, validationPassword, validationDate, validationSalary, validationRole, validationWorkHours }
 
 // Example usage:
 // const account = "abc123";
