@@ -80,7 +80,7 @@ function getForm() {
 }
 // ----------------------------------------------------------------
 // lay thong tin tu from va tao user obj
-function getInfo() {
+function getInfo(type) {
     const form = getForm();
     let { account, name, email, password, datepicker, salary, role, workHours } = form;
     console.log(account, name, email, password, datepicker, salary, role, workHours);
@@ -89,9 +89,11 @@ function getInfo() {
         return;
     }
 
-    if (!checkUniqueAccount(account.value, users)) {
-        alert('Tài khoản đã tồn tại');
-        return;
+    if (type != 1) {
+        if (!checkUniqueAccount(account.value, users)) {
+            alert('Tài khoản đã tồn tại');
+            return;
+        }
     }
     account = account.value.padStart(6, '0');
     // console.log(account);
@@ -148,7 +150,7 @@ function getInfo() {
 // ----------------------------------------------------------------
 // day user vao mang, handle lai table va reset from
 function addUser() {
-    const user = getInfo();
+    const user = getInfo(0);
     if (user) {
         users.push(user);
         handleTable(users);
@@ -235,7 +237,8 @@ function fillInfo(account) {
     name.value = users[index][propName];
     email.value = users[index][propEmail];
     password.value = users[index][propPassword];
-    datepicker.value = users[index][propDatePicker];
+    let parts = users[index][propDatePicker].split('/');
+    datepicker.value = `${parts[1]}/${parts[0]}/${parts[2]}`;
     salary.value = users[index][propSalary];
     role.value = users[index][propRole];
     workHours.value = users[index][propWorkHoursMonth];
@@ -246,7 +249,7 @@ document.getElementById('btnCapNhat').addEventListener('click', function () {
     if (!confirm('Bạn có muốn cập nhật không?')) {
         return;
     }
-    const user = getInfo();
+    const user = getInfo(1);
     if (user) {
         const index = users.findIndex(u => u[propAccount] == user[propAccount]);
         if (index === -1) {
