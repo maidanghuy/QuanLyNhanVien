@@ -155,6 +155,11 @@ function addUser() {
         users.push(user);
         handleTable(users);
         resetForm();
+        Toastify({
+            text: "Add account successfully!",
+            duration: 3000,
+            backgroundColor: "linear-gradient(to right, #0066ff,#0043a7)",
+        }).showToast();
     }
 }
 document.getElementById("btnThemNV").addEventListener("click", addUser);
@@ -260,6 +265,11 @@ document.getElementById('btnCapNhat').addEventListener('click', function () {
         users.push(user);
         handleTable(users);
         resetForm();
+        Toastify({
+            text: "Update account successfully!",
+            duration: 3000,
+            backgroundColor: "linear-gradient(to right, #4CAF50, #45a049)",
+        }).showToast();
     }
     const id = document.getElementById(propAccount);
     id.readOnly = false;
@@ -282,6 +292,11 @@ function deleteUser(account) {
     users.splice(index, 1);
     handleTable(users);
     resetForm();
+    Toastify({
+        text: "Delete account successfully!",
+        duration: 3000,
+        backgroundColor: "linear-gradient(to right, #FF0000, #FFA500)",
+    }).showToast();
 }
 
 
